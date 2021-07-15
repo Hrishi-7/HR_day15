@@ -1,50 +1,35 @@
-package com.abstractclass;
-
+package com.exceptionHandling;
 import java.util.*;
+import java.io.*;
 
-class Node {
-    int data;
-    Node next;
-    Node(int d) {
-        data = d;
-        next = null;
+class Calculator{
+    public static int power(int n, int p) throws Exception{
+        if(n<0 || p<0){
+            throw new Exception("n and p should be non-negative");
+        }
+        return (int)Math.pow(n,p);
     }
 }
 
-
-public class Main {
-    public static Node insert(Node head, int data) {
-        if(head==null){
-            return new Node(data);
-        }
-        else if(head.next==null){
-            head.next = new Node(data);
-        }
-        else {
-            insert(head.next, data);
-        }
-
-        return head;
-
-    }
-
-    public static void display(Node head){
-        Node start = head;
-        while(start != null) {
-            System.out.print(start.data + " ");
-            start = start.next;
-        }
-    }
+class Main{
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Node head = null;
-        int N = sc.nextInt();
-        while(N-->0){
-            int ele = sc.nextInt();
-            head = insert(head,ele);
+
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        while (t-- > 0) {
+
+            int n = in.nextInt();
+            int p = in.nextInt();
+            Calculator myCalculator = new Calculator();
+            try {
+                int ans = myCalculator.power(n, p);
+                System.out.println(ans);
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-        display(head);
-        sc.close();
+        in.close();
     }
 }
